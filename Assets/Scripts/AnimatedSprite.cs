@@ -3,7 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class AnimatedSprite : MonoBehaviour
 {
-    public Sprite[] sprites;
+    public Sprite[] runSprites;
+    public Sprite[] crouchSprites;
 
     private SpriteRenderer spriteRenderer;
     private int frame;
@@ -27,12 +28,16 @@ public class AnimatedSprite : MonoBehaviour
     {
         frame++;
 
-        if (frame >= sprites.Length) {
+        if (frame >= runSprites.Length) {
             frame = 0;
         }
 
-        if (frame >= 0 && frame < sprites.Length) {
-            spriteRenderer.sprite = sprites[frame];
+        if (frame >= 0 && frame < runSprites.Length) {
+            // Animating running/crouching - NOT working 
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+                spriteRenderer.sprite = crouchSprites[frame];
+            else
+                spriteRenderer.sprite = runSprites[frame];
         }
 
         Invoke(nameof(Animate), 1f / GameManager.Instance.gameSpeed);
