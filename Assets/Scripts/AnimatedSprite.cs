@@ -8,6 +8,7 @@ public class AnimatedSprite : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private int frame;
+    private bool isCrouching;
 
     private void Awake()
     {
@@ -24,20 +25,31 @@ public class AnimatedSprite : MonoBehaviour
         CancelInvoke();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            isCrouching = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            isCrouching = false;
+        }
+    }
+
     private void Animate()
     {
         frame++;
-
-        if (frame >= runSprites.Length) {
+        if (frame >= runSprites.Length)
             frame = 0;
-        }
 
-        if (frame >= 0 && frame < runSprites.Length) {
-            // Animating running/crouching - NOT working 
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-                spriteRenderer.sprite = crouchSprites[frame];
-            else
-                spriteRenderer.sprite = runSprites[frame];
+        if (isCrouching && frame < crouchSprites.Length)
+        {
+            spriteRenderer.sprite = crouchSprites[frame];
+        }
+        else if (!isCrouching && frame < runSprites.Length)
+        {
+            spriteRenderer.sprite = runSprites[frame];
         }
 
         Invoke(nameof(Animate), 1f / GameManager.Instance.gameSpeed);
