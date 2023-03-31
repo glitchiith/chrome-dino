@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     public float initialGameSpeed = 5f;
     public float gameSpeedIncrease = 0.1f;
+    public AnimatedSprite animator;
     public float gameSpeed { get; private set; }
 
     public TextMeshProUGUI scoreText;
@@ -70,6 +71,7 @@ public class GameManager : MonoBehaviour
         gameSpeed = 0f;
         enabled = false;
 
+        animator.isCrouching = false;
         player.gameObject.SetActive(false);
         spawner.gameObject.SetActive(false);
         gameOverText.gameObject.SetActive(true);

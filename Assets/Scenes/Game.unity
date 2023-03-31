@@ -242,6 +242,7 @@ MonoBehaviour:
   crouchSprites:
   - {fileID: 21300000, guid: 76659524990116446b9b0c6b354e939e, type: 3}
   - {fileID: 21300000, guid: 9131a2d6417dfbd4ba2a0d175b561854, type: 3}
+  isCrouching: 0
 --- !u!143 &148278
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1189,6 +1190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialGameSpeed: 5
   gameSpeedIncrease: 0.1
+  animator: {fileID: 148277}
   scoreText: {fileID: 550957954}
   hiscoreText: {fileID: 151625051}
   gameOverText: {fileID: 1081033933}

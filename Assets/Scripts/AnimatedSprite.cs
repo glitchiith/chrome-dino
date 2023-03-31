@@ -8,7 +8,7 @@ public class AnimatedSprite : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private int frame;
-    private bool isCrouching;
+    public bool isCrouching;
 
     private void Awake()
     {
@@ -27,13 +27,24 @@ public class AnimatedSprite : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            isCrouching = true;
-        }
-        else if (Input.GetKeyUp(KeyCode.DownArrow))
+        if (!gameObject.activeSelf)
         {
             isCrouching = false;
+        }
+        if (gameObject.GetComponent<CharacterController>().isGrounded)
+        {
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                isCrouching = true;
+            }
+            else if (Input.GetKeyUp(KeyCode.DownArrow))
+            {
+                isCrouching = false;
+            }
+        }
+        else
+        {
+            isCrouching = false;    
         }
     }
 
